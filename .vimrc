@@ -30,3 +30,12 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 
 autocmd FileType python set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
 autocmd FileType python set errorformat=%f:%l:\ %m
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
