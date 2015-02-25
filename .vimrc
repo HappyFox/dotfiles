@@ -50,3 +50,6 @@ let g:syntastic_auto_loc_list = 1
 
 "Close NERDTree if it's the last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+map <F1> :NERDTreeToggle<CR>
+map <F2> :SyntasticCheck<CR>
