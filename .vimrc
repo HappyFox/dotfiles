@@ -33,17 +33,14 @@ set tags=tags;/
 filetype plugin on        
 autocmd BufWritePre *.py :%s/\s\+$//e
 
-"Set pylint as the make command for python files
-autocmd FileType python set makeprg=pylint\ --reports=n\ --output-format=parseable\ %:p
-autocmd FileType python set errorformat=%f:%l:\ %m
 
 "Syntastic stuff
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 "let g:syntastic_python_checkers = ['pyflakes']
@@ -52,4 +49,5 @@ let g:syntastic_auto_loc_list = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <F1> :NERDTreeToggle<CR>
-map <F2> :SyntasticCheck<CR>
+map <Leader>s :lopen<CR>
+map <Leader>S :lclose<CR>
