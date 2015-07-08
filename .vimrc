@@ -34,6 +34,8 @@ filetype plugin on
 autocmd BufWritePre *.py :%s/\s\+$//e
 
 
+set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
+
 "Syntastic stuff
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
