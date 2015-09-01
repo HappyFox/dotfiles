@@ -12,8 +12,6 @@ set ruler
 set textwidth=78
 set spell
 
-colorscheme slate
-
 set guioptions-=T
 syn on
 set nowrap 
@@ -54,3 +52,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 map <F1> :NERDTreeToggle<CR>
 map <Leader>s :lopen<CR>
 map <Leader>S :lclose<CR>
+
+colorscheme slate
+hi ColorColumn ctermbg=blue
+hi SpellBad cterm=NONE ctermbg=blue ctermfg=white
+hi Error cterm=NONE ctermbg=1 ctermfg=7
