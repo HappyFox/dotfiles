@@ -25,6 +25,7 @@ set smartcase
 set showmode
 set incsearch
 set smartindent
+set colorcolumn=80
 
 set guifont=menlo\ 11
 
