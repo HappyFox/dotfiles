@@ -10,7 +10,7 @@ set softtabstop=4 " when you hit tab in insert mode.
 
 set ruler
 set textwidth=78
-"set spell!
+"set spell
 
 set guioptions-=T
 syn on
@@ -50,6 +50,7 @@ let g:syntastic_auto_loc_list = 0
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <F1> :NERDTreeToggle<CR>
+map <F2> :set spell!<CR>
 map <Leader>s :lopen<CR>
 map <Leader>S :lclose<CR>
 
