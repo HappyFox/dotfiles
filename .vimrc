@@ -10,7 +10,7 @@ set softtabstop=4 " when you hit tab in insert mode.
 
 set ruler
 set textwidth=78
-set spell
+"set spell!
 
 set guioptions-=T
 syn on
