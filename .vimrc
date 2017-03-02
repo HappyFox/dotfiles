@@ -31,6 +31,7 @@ set tags=tags;/
 
 filetype plugin on        
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd QuickFixCmdPost * :copen
 
 
 set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
@@ -44,17 +45,20 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
-"let g:syntastic_python_checkers = ['pep8' 'pylint']
+let g:syntastic_python_checkers = ['pep8', 'pylint']
 
 "Close NERDTree if it's the last window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 map <F1> :NERDTreeToggle<CR>
 map <F2> :set spell!<CR>
+map <F7> :make<CR>
+map <F8> :make test<CR>
+map <F9> :make repl<CR>
 map <Leader>s :lopen<CR>
 map <Leader>S :lclose<CR>
 
-colorscheme slate
+colorscheme solarized
 hi ColorColumn ctermbg=blue
 hi SpellBad cterm=NONE ctermbg=blue ctermfg=white
 hi Error cterm=NONE ctermbg=1 ctermfg=7
