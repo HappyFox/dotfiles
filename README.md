@@ -3,18 +3,24 @@ My dot files and a deploy script
 
 Installation:
 
-    git clone git://github.com/baston/dotvim.git ~/.vim
+    git clone https://github.com/HappyFox/dotfiles.git
 
 Create symlinks:
 
-    ln -s ~/.vim/vimrc ~/.vimrc
-    ln -s ~/.vim/gvimrc ~/.gvimrc
+For vim :
+    
+    ln -s dotfiles/.vimrc ~/.vimrc
+    ln -s dotfiles/.vim ~/.vim
 
-Switch to the `~/.vim` directory, and fetch submodules:
+For tmux :
 
-    cd ~/.vim
+    ln -s dotfiles/.tmux ~/.tmux
+
+Switch to the `dotfiles/.vim` directory, and fetch submodules:
+
+    cd ~/dotfiles
     git submodule init
     git submodule update
-    cd .vim/bundle/jedi/
-    git submodule init
-    git submodule update
+
+I have a batch of other things in here. Dir colors, vim color schemes etc.
+Check it out for anything you want to copy/take.
