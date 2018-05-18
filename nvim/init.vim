@@ -4,24 +4,26 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/root/.config/nvim/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/root/.config/nvim/')
-  call dein#begin('/root/.config/nvim/')
-
+if dein#load_state('~/.cache/dein/')
+  call dein#begin('~/.cache/dein/')
+ 
+  call dein#add('~/.cache/dein')
+  call dein#add('Shougo/deoplete.nvim')
   " Let dein manage dein
   " Required:
-  call dein#add('/root/.config/nvim/repos/github.com/Shougo/dein.vim')
+  "call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('Shougo/deoplete.nvim')
+  " call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/neosnippet-snippets')
+  "call dein#add('Shougo/deoplete.dein')
 
-  call dein#add('ervandew/supertab')
+  "call dein#add('ervandew/supertab')
 
-  call dein#add('neomake/neomake')
+  " call dein#add('neomake/neomake')
   call dein#add('altercation/vim-colors-solarized')
 
   " You can specify revision/branch/tag.
@@ -32,10 +34,15 @@ if dein#load_state('/root/.config/nvim/')
   call dein#save_state()
 endif
 
+if dein#check_install()
+  call dein#install()
+endif
+
 let g:deoplete#enable_at_startup = 1
-"if !exists('g:deoplete#omni#input_patterns')
-" let g:deoplete#omni#input_patterns = {}
-"endif
+
+if !exists('g:deoplete#omni#input_patterns')
+ let g:deoplete#omni#input_patterns = {}
+endif
 
 
 " let g:deoplete#disable_auto_complete = 1
@@ -92,22 +99,22 @@ set guifont=menlo\ 11
 set tags=tags;/ 
 
 autocmd BufWritePre *.py :%s/\s\+$//e
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
 
 set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
 
 
-let g:neomake_warning_sign = {
-  \ 'text': 'W',
-  \ 'texthl': 'WarningMsg',
-  \ }
-let g:neomake_error_sign = {
-  \ 'text': 'E',
-  \ 'texthl': 'ErrorMsg',
-  \ }
+"let g:neomake_warning_sign = {
+"  \ 'text': 'W',
+"  \ 'texthl': 'WarningMsg',
+"  \ }
+"let g:neomake_error_sign = {
+"  \ 'text': 'E',
+"  \ 'texthl': 'ErrorMsg',
+"  \ }
 
 
-let g:neomake_open_list = 2
+"let g:neomake_open_list = 2
 
 set background=dark
 colorscheme solarized
