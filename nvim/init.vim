@@ -13,7 +13,7 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('~/.cache/dein')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-jedi')
-  " call dein#add('neomake/neomake')
+  call dein#add('neomake/neomake')
   call dein#add('altercation/vim-colors-solarized')
 
   " Required:
@@ -38,12 +38,6 @@ endif
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 
-" augroup omnifuncs
-"   autocmd!
-"   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" augroup End
-
-
 " Required:
 filetype plugin indent on
 syntax enable
@@ -55,6 +49,7 @@ endif
 
 "End dein Scripts-------------------------
 set backspace=2 " allow backspacing of everything, including \n
+
 
 
 set ts=4 " set tabstop to 4
@@ -84,25 +79,31 @@ set guifont=menlo\ 11
 set tags=tags;/ 
 
 autocmd BufWritePre *.py :%s/\s\+$//e
-" autocmd! BufWritePost * Neomake
 
 set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
 
 
-"let g:neomake_warning_sign = {
-"  \ 'text': 'W',
-"  \ 'texthl': 'WarningMsg',
-"  \ }
-"let g:neomake_error_sign = {
-"  \ 'text': 'E',
-"  \ 'texthl': 'ErrorMsg',
-"  \ }
-
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
+let g:neomake_info_sign = {
+  \ 'text': 'I',
+  \ 'texthl': 'InfoMsg',
+  \ }
 
 "let g:neomake_open_list = 2
+call neomake#configure#automake('nrw', 1000)
+
+map <Leader>s :lopen<CR>
+map <Leader>S :lclose<CR>
 
 set background=dark
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
+"let g:solarized_termcolors = 16
 colorscheme solarized
-"hi ColorColumn ctermbg=darkblue
-"hi SpellBad cterm=NONE ctermbg=blue ctermfg=white
-"hi Error cterm=NONE ctermbg=1 ctermfg=7
