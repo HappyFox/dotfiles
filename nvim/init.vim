@@ -12,22 +12,9 @@ if dein#load_state('~/.cache/dein/')
  
   call dein#add('~/.cache/dein')
   call dein#add('Shougo/deoplete.nvim')
-  " Let dein manage dein
-  " Required:
-  "call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-  " Add or remove your plugins here:
-  " call dein#add('Shougo/neosnippet.vim')
-  " call dein#add('Shougo/neosnippet-snippets')
-  "call dein#add('Shougo/deoplete.dein')
-
-  "call dein#add('ervandew/supertab')
-
+  call dein#add('zchee/deoplete-jedi')
   " call dein#add('neomake/neomake')
   call dein#add('altercation/vim-colors-solarized')
-
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
   " Required:
   call dein#end()
@@ -45,11 +32,9 @@ if !exists('g:deoplete#omni#input_patterns')
 endif
 
 
-" let g:deoplete#disable_auto_complete = 1
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " deoplete tab-complete
-autocmd FileType python let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+" autocmd FileType python let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 
