@@ -51,7 +51,7 @@ endif
 set backspace=2 " allow backspacing of everything, including \n
 
 
-
+tnoremap <Esc> <C-\><C-n>
 set ts=4 " set tabstop to 4
 set shiftwidth=4 " also set shiftwidth to 4
 set expandtab " expand tabs to spaces
