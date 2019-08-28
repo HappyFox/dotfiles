@@ -15,6 +15,7 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('zchee/deoplete-jedi')
   call dein#add('neomake/neomake')
   call dein#add('altercation/vim-colors-solarized')
+  call dein#add('psf/black')
 
   " Required:
   call dein#end()
@@ -79,9 +80,11 @@ set guifont=menlo\ 11
 set tags=tags;/ 
 
 autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.py execute ':Black'
 
 set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
 
+let g:neomake_python_exe = 'python3'
 
 let g:neomake_warning_sign = {
   \ 'text': 'W',
