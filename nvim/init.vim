@@ -3,15 +3,13 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-"  call dein#add('Shougo/deoplete.nvim')
-"  call dein#add('zchee/deoplete-jedi')
-
 " Installation :  https://github.com/junegunn/vim-plug#neovim
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'iCyMind/NeoSolarized'
 
 call plug#end()
 
@@ -32,12 +30,13 @@ let g:ale_fix_on_save = 1
 let g:airline#extensions#tabline#enabled = 1
 
 
-let g:deoplete#enable_at_startup = 1
+"deoplete sections in case I add it back.
+
+"let g:deoplete#enable_at_startup = 1
 
 "if !exists('g:deoplete#omni#input_patterns')
 " let g:deoplete#omni#input_patterns = {}
 "endif
-
 
 " deoplete tab-complete
 " autocmd FileType python let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
@@ -74,37 +73,16 @@ set smartindent
 set colorcolumn=80
 
 set guifont=menlo\ 11
+set termguicolors
 
 set tags=tags;/
 
 autocmd BufWritePre *.py :%s/\s\+$//e
-"autocmd BufWritePre *.py execute ':Black'
 
 set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
-
-"let g:neomake_python_exe = 'python3'
-
-"let g:neomake_warning_sign = {
-"  \ 'text': 'W',
-"  \ 'texthl': 'WarningMsg',
-"  \ }
-"let g:neomake_error_sign = {
-"  \ 'text': 'E',
-"  \ 'texthl': 'ErrorMsg',
-"  \ }
-"let g:neomake_info_sign = {
-"  \ 'text': 'I',
-"  \ 'texthl': 'InfoMsg',
-"  \ }
-
-"let g:neomake_open_list = 2
-"call neomake#configure#automake('nrw', 1000)
 
 map <Leader>s :lopen<CR>
 map <Leader>S :lclose<CR>
 
 set background=dark
-"let g:solarized_visibility = "high"
-"let g:solarized_contrast = "high"
-"let g:solarized_termcolors = 16
-"colorscheme solarized
+colorscheme NeoSolarized
