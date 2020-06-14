@@ -29,6 +29,7 @@ let g:ale_fix_on_save = 1
 "Airline
 let g:airline#extensions#tabline#enabled = 1
 
+set guicursor=n-v-c:hor10-blinkwait300-blinkon200-blinkoff150,i-ci-r-v:ver25
 
 "deoplete sections in case I add it back.
 
@@ -74,6 +75,7 @@ set colorcolumn=80
 
 set guifont=menlo\ 11
 set termguicolors
+"set guicursor=
 
 set tags=tags;/
 
