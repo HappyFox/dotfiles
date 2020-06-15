@@ -81,6 +81,8 @@ set tags=tags;/
 
 autocmd BufWritePre *.py :%s/\s\+$//e
 
+autocmd FileType javascript setlocal ts=2 shiftwidth=2 softtabstop=2 expandtab
+
 set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}
 
 map <Leader>s :lopen<CR>
