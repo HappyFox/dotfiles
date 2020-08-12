@@ -43,6 +43,9 @@ set guicursor=n-v-c:hor10-blinkwait300-blinkon200-blinkoff150,i-ci-r-v:ver25
 " autocmd FileType python let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 "inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+autocmd FileType javascript setlocal shiftwidth=2 ts=2 softtabstop=2
+
+
 
 " Required:
 filetype plugin indent on
