@@ -65,10 +65,48 @@ require("lazy").setup(
     'iCyMind/NeoSolarized',
     'folke/tokyonight.nvim',
     'gerardbm/vim-atomic',
+    'wfxr/minimap.vim',
 })
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+
+vim.g.minimap_width = 10
+vim.g.minimap_auto_start = 1
+vim.g.minimap_auto_start_win_enter = 1
+
+if vim.g.neovide then
+        font_size = 11
+        font = "FantasqueSansM Nerd Font Mono:h%s"
+
+
+        function to_font_str()
+                return string.format(font, font_size)
+        end
+
+        function inc_font()
+                font_size = font_size + 1 
+                vim.o.guifont = to_font_str()
+        end
+
+        function dec_font()
+                font_size = font_size - 1 
+                vim.o.guifont = to_font_str()
+        end
+
+        vim.o.guifont = to_font_str()
+
+
+        vim.keymap.set('n', '<C-=>', inc_font, {})
+        vim.keymap.set('n', '<C-->', dec_font, {})
+
+        vim.keymap.set('n', '<leader>m', function ()
+		vim.cmd("cd %:p:h")
+	end, {})
+
+end
+
 
 
 require'lspconfig'.pylsp.setup{
@@ -227,7 +265,7 @@ vim.wo.wrap = false
 vim.wo.number = true
 vim.wo.cursorline = true
 vim.wo.signcolumn = 'yes'
---vim.wo.relativenumber = true
+vim.wo.relativenumber = true
 
 
 vim.cmd[[colorscheme tokyonight-night]]
