@@ -30,6 +30,8 @@ fi
 source ~/.secrets 
 
 
-nv() { nvr.exe -s --nostart --servername "\\\\.\\pipe\\nvim-nvr" -l $(wslpath -w $1 | awk '{ sub(/^.*Ubuntu/, "Z:"); gsub(/\\/, "\\\\"); print }') ; }
+# nv() { nvr.exe -s --nostart --servername "\\\\.\\pipe\\nvim-nvr" -l $(wslpath -w $1 | awk '{ sub(/^.*Ubuntu/, "Z:"); gsub(/\\/, "\\\\"); print }') ; }
+nv() { nvr -s --nostart --servername "/tmp/nvimsocket" -l  $1; }
+
 
 eval "$(oh-my-posh init bash --config ~/.cache/oh-my-posh/themes/atomic.omp.json)"
