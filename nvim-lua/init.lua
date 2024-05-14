@@ -66,6 +66,16 @@ require("lazy").setup(
     'folke/tokyonight.nvim',
     'gerardbm/vim-atomic',
     'wfxr/minimap.vim',
+    'haystackandroid/rusticated', 
+    'sainnhe/edge',
+    { "catppuccin/nvim", name = "latte", priority = 1000 },   
+    {"mcchrish/zenbones.nvim", dependencies = {"rktjmp/lush.nvim",}},
+    {
+        "yorik1984/newpaper.nvim",
+        priority = 1000,
+        config = true,
+    },    
+    'sainnhe/everforest',
 })
 
 vim.g.mapleader = ' '
@@ -76,37 +86,51 @@ vim.g.minimap_width = 10
 vim.g.minimap_auto_start = 1
 vim.g.minimap_auto_start_win_enter = 1
 
-if vim.g.neovide then
-        font_size = 11
-        font = "FantasqueSansM Nerd Font Mono:h%s"
+font_size = 11
+font = "FantasqueSansM Nerd Font Mono:h%s"
 
 
-        function to_font_str()
-                return string.format(font, font_size)
-        end
-
-        function inc_font()
-                font_size = font_size + 1 
-                vim.o.guifont = to_font_str()
-        end
-
-        function dec_font()
-                font_size = font_size - 1 
-                vim.o.guifont = to_font_str()
-        end
-
-        vim.o.guifont = to_font_str()
-
-
-        vim.keymap.set('n', '<C-=>', inc_font, {})
-        vim.keymap.set('n', '<C-->', dec_font, {})
-
-        vim.keymap.set('n', '<leader>m', function ()
-		vim.cmd("cd %:p:h")
-	end, {})
-
+function to_font_str()
+        return string.format(font, font_size)
 end
 
+function inc_font()
+        font_size = font_size + 1 
+        vim.o.guifont = to_font_str()
+end
+
+function dec_font()
+        font_size = font_size - 1 
+        vim.o.guifont = to_font_str()
+end
+
+vim.o.guifont = to_font_str()
+
+
+vim.keymap.set('n', '<C-=>', inc_font, {})
+vim.keymap.set('n', '<C-->', dec_font, {})
+
+vim.keymap.set('n', '<leader>m', function ()
+vim.cmd("cd %:p:h")
+end, {})
+
+require("toggleterm").setup{
+        open_mapping = [[<c-\>]],
+}
+
+function _G.set_terminal_keymaps()
+  local opts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+  vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 
 require'lspconfig'.pylsp.setup{
@@ -199,16 +223,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wl', function()
+    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<leader>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
+    vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
   end,
@@ -216,7 +240,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 local builtin = require('telescope.builtin')
 
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format {async=true}]]
+vim.keymap.set('n', '<leader>d', function()
+    vim.opt.bg = 'dark'
+end, {})
+vim.keymap.set('n', '<leader>l', function()
+    vim.opt.bg = 'light'
+end, {})
+
+
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format {async=false}]]
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
@@ -268,4 +300,4 @@ vim.wo.signcolumn = 'yes'
 vim.wo.relativenumber = true
 
 
-vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd[[colorscheme everforest]]
