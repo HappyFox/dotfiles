@@ -300,4 +300,4 @@ vim.wo.signcolumn = 'yes'
 vim.wo.relativenumber = true
 
 
-vim.cmd[[colorscheme everforest]]
+vim.cmd[[colorscheme tokyonight]]
