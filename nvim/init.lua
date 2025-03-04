@@ -11,6 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 require("lazy").setup(
 {
     {
@@ -27,18 +28,55 @@ require("lazy").setup(
           })
       end
     },
-    "nvimtools/none-ls.nvim",
-    "neovim/nvim-lspconfig",
-    { 
-        "willothy/nvim-cokeline",
-        dependencies = {
-            "nvim-lua/plenary.nvim",        -- Required for v0.4.0+
-            "nvim-tree/nvim-web-devicons", -- If you want devicons
-            "stevearc/resession.nvim"       -- Optional, for persistent history
-        },
-        config = true,
-    },
+    {
+            "nvimtools/none-ls.nvim",
+            dependancies = {"mason-tool-installer.nvim"},
+            config = function ()
+                null_ls = require("null-ls")
+                null_ls.setup({
+                  sources = {
+                    null_ls.builtins.diagnostics.pylint,
+                    null_ls.builtins.diagnostics.mypy,
+                    null_ls.builtins.formatting.isort,
+                    null_ls.builtins.formatting.black,
+                  }
+                })
+             end
 
+    },
+    {
+        "neovim/nvim-lspconfig",
+    },
+    {
+        "williamboman/mason.nvim",
+        config = function()
+                require("mason").setup()
+        end,
+    {
+         "williamboman/mason-lspconfig.nvim",
+         dependancies = { "mason.nvim", "nvim-lspconfig.nvim" }, 
+         config = function()
+                require("mason").setup()
+                require("mason-lspconfig").setup()
+                require("mason-lspconfig").setup_handlers {
+			function (server_name)
+			    require("lspconfig")[server_name].setup {}
+			end,
+	        }
+        end,
+        },
+        automatic_installation=true,
+        
+    },
+    {
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        dependencies= { "mason.nvim", "mason-lspconfig.nvim" },
+        config = function()
+                require("mason-tool-installer").setup {
+                        ensure_installed={"mypy", "pylint", "black", "isort"},
+                                }
+        end,
+    },
     {
         'lewis6991/gitsigns.nvim', 
         config=true,
@@ -77,6 +115,7 @@ require("lazy").setup(
     },    
     'sainnhe/everforest',
 })
+
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -129,75 +168,9 @@ function _G.set_terminal_keymaps()
   vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 end
 
+
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
-
-require'lspconfig'.pylsp.setup{
-  settings = {
-    pylsp = {
-      plugins = {
---        pylint = {
---            enabled = true,
---          --executable="pylint", 
---            args = {' -j 8 --init-hook="import sys, threading; threading.stack_size(67108864);  sys.setrecursionlimit(10000)"'},
---        },
---        black = {
---            enabled = true,
---        },
-        ruff = {
-            enabled=true,
-            extendSelect={"ALL"},
-            format={"ALL"},
-            formatEnabled=true,
-        },
-        mypy = {
-            enabled=true,
-        },
-      }
-    }
-  }
-}
-
---require('lspconfig').ruff_lsp.setup {
---  init_options = {
---    settings = {
---      -- Any extra CLI arguments for `ruff` go here.
---      args = {
---        "--select", "PL",
---        "--select", "C90",
---        "--select", "I",
---        "--select", "N",
---        "--select", "U",
---        "--select", "D",
---        "--select", "UP",
---        "--select", "ERA",
---        "--select", "RUF",
---        "--select", "ANN",
---        "--select", "ASYNC",
---        "--select", "BLE",
---        "--select", "B",
---        "--select", "A",
---        "--select", "COM",
---        "--select", "C4",
---        "--select", "PIE",
---        "--select", "PYI",
---        "--select", "Q",
---        "--select", "RSE",
---        "--select", "RET",
---        "--select", "SLF",
---        "--select", "SLOT",
---        "--select", "SIM",
---        "--select", "INT",
---        "--select", "ARG",
---        "--select", "PTH",
---        "--select", "TD",
---        "--select", "FIX",
---        
---      },
---    }
---  }
---}
 
 
 -- Global mappings.
