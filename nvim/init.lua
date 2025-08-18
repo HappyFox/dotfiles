@@ -293,27 +293,30 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz");
 
 vim.o.scrolloff = 8;
 
-
-
 -- Global options
-vim.o.mouse = 'a'
 vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.smarttab = true
+vim.o.expandtab = true
+
 vim.o.syntax = 'on'
 vim.o.ruler = true
 vim.o.hidden = true
 vim.o.fcs = 'eob: '
 vim.o.laststatus = 2
 vim.o.showtabline = 0
-vim.o.smarttab = true
+vim.o.mouse = 'a'
+
 vim.o.undofile = true
 vim.o.hlsearch = true
 vim.o.updatetime = 250
-vim.o.expandtab = true
+
 vim.o.smartcase = true
 vim.o.ignorecase = true
 vim.o.breakindent = true
 vim.o.termguicolors = true
 vim.o.guifont = "FantasqueSansM Nerd Font Mono:h11"
+vim.o.colorcolumn="80"
 
 -- Buffer options
 vim.bo.tabstop = 4
