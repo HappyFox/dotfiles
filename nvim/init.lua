@@ -95,15 +95,18 @@ require("lazy").setup(
          dependancies = { "mason.nvim", "nvim-lspconfig.nvim" }, 
          config = function()
                 require("mason").setup()
-                require("mason-lspconfig").setup()
-                require("mason-lspconfig").setup_handlers {
-			function (server_name)
-			    require("lspconfig")[server_name].setup {}
-			end,
-	        }
+                require("mason-lspconfig").setup({
+
+                    handlers= {
+                        function (server_name)
+                            require("lspconfig")[server_name].setup {}
+                        end,
+                	},
+		    automatic_installation=true,
+                })
         end,
-        },
-        automatic_installation=true,
+    }
+    
         
     },
     {
@@ -141,7 +144,6 @@ require("lazy").setup(
             { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
           },
           lazy = false,
-          branch = "regexp", -- This is the regexp branch, use this for the new version
           keys = {
             { ",v", "<cmd>VenvSelect<cr>" },
           },
